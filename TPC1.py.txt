@@ -1,0 +1,71 @@
+#Soma de fosforos
+soma=21
+
+
+def inicio():
+    print("Bem vindo ao jogo dos 21 fósforos. Perde quem ficar com o último fósforo.")
+    jog=input("Escolha se quer ser o jogador1 ou jogador2: ")
+    return(jog)
+
+def retirar():
+    global soma
+    jog1=int(input("Introduza o número de fósforos que pretende retirar:"))
+    while(jog1>=5 or jog1<=0):
+        print("Erro! Só pode introduzir os números 1,2,3 ou 4.")
+        jog1=int(input("Introduza o número de fósforos que pretende retirar:"))
+    ultima=jog1
+    soma=soma-jog1
+    print(soma)
+    return(jog1)
+
+def computador(ultima):
+    global soma
+    j=5-ultima
+    print("Vou retirar o", j)
+    soma=soma-j
+    print(soma)
+    return(j)
+
+def computador1():
+    global soma
+    if(soma==21):
+        j=1
+    elif(soma>16 and soma-16<=4 and soma-16>0):
+        j=soma-16
+    elif(soma>11 and soma-11<=4 and soma-11>0):
+        j=soma-11
+    elif(soma>6 and soma-6<=4 and soma-6>0):
+        j=soma-6
+    else:
+        j=1
+    print("Vou retirar o", j)
+    soma=soma-j
+    print(soma)
+    return(j)
+    
+def jogo(jog):
+    if (jog=="jogador 1" or jog=="jogador1"):
+        while(soma > 1): 
+            ultima=retirar()
+            computador(ultima)
+            if(soma==1):
+                print("Perdeste!Ganhou o computador.")
+    if (jog=="jogador 2" or jog=="jogador2"):
+          while(soma > 1): 
+            computador1()
+            if(soma==1):
+                print("Perdeste!Ganhou o computador.")
+                break
+            retirar()
+            if(soma==1):
+                print("Ganhaste! Parabéns.")
+            
+
+def main():
+    jog=inicio()
+    print(jog)
+    jogo(jog)
+
+
+if __name__ == "__main__":
+    main()
